@@ -1,9 +1,10 @@
 import { createContext, useState, ReactNode, useContext } from "react";
 
+import User from '../Entities/User';
 interface StateContextType {
-  user: string | null;
+  user: User | null;
   token: string | null;
-  setUser: (user: string | null) => void;
+  setUser: (user: User | null) => void;
   setToken: (token: string | null) => void;
 }
 
@@ -19,7 +20,9 @@ interface ContextProviderProps {
 }
 
 export const ContextProvider = ({ children }: ContextProviderProps) => {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>({
+    name: 'John'
+  });
   const [token, _setToken] = useState<string | null>(localStorage.getItem('ACCESS_TOKEN'));
 
   const setToken = (token: string | null) => {
