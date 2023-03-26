@@ -12,9 +12,9 @@ interface DefaultLayoutProps {
 export default function DefaultLayout() {
   const {token, user} = useStateContext();
   
-  // if (!token) {
-  //   return <Navigate to='/login' />
-  // }
+  if (!token) {
+    return <Navigate to='/login' />
+  }
 
   const onLogout = (ev: React.MouseEvent) => {
    ev.preventDefault;
