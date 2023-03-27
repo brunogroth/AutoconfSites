@@ -13,9 +13,9 @@ export default function Signup() {
   const passwordConfirmationRef = useRef<HTMLInputElement>(null);
 
   const [errors, setErrors] = useState(null);
-  const {setUser, setToken} = useStateContext();
-   
-  const onSubmit = (ev:FormEvent) => {
+  const { setUser, setToken } = useStateContext();
+
+  const onSubmit = (ev: FormEvent) => {
     ev.preventDefault();
     // Construct payload
     const payload = {
@@ -28,13 +28,13 @@ export default function Signup() {
     console.log(payload);
     // Submit request to server
     axiosClient.post('/signup', payload)
-      .then(({data}: any) => {
+      .then(({ data }: any) => {
         setUser(data.user)
         setToken(data.token)
       })
       .catch((err) => {
         const response = err.response;
-        if(response && response.status === 422){
+        if (response && response.status === 422) {
           console.log(response.data.errors);
           setErrors(response.data.errors);
         }
@@ -46,17 +46,19 @@ export default function Signup() {
       <div className="form">
         <form onSubmit={onSubmit}>
           <h1 className='title'>Registre-se em Autoconf Sites</h1>
-          {errors && <div className='alert'>
-            <ul>
-            {Object.keys(errors).map(key => (
-              <li key={key}>{errors[key][0]}</li>
-            ))}
-            </ul>
-            </div>}
-          <input ref={nameRef} placeholder='Nome' type={'text'}/>
-          <input ref={emailRef} placeholder='Email' type={'email'}/>
-          <input ref={passwordRef} placeholder='Senha' type={'password'}/>
-          <input ref={passwordConfirmationRef} placeholder='Confirmação de Senha' type={'password'}/>
+          {
+            errors && <div className='alert'>
+              <ul>
+                {Object.keys(errors).map(key => (
+                  <li key={key}>{errors[key][0]}</li>
+                ))}
+              </ul>
+            </div>
+          }
+          <input ref={nameRef} placeholder='Nome' type={'text'} />
+          <input ref={emailRef} placeholder='Email' type={'email'} />
+          <input ref={passwordRef} placeholder='Senha' type={'password'} />
+          <input ref={passwordConfirmationRef} placeholder='Confirmação de Senha' type={'password'} />
           <button className='btn btn-block'>Registrar-se</button>
           <p className='message'>
             Já registrado? <Link to="/login">Fazer Login</Link>

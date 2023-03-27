@@ -28,14 +28,14 @@ export default function DefaultLayout() {
         <span style={{fontSize:'1.5rem', color: 'white'}}> Autoconf Sites</span>
         <hr/>
         <Link to="/dashboard">Dashboard</Link>
-        <Link to="/users">Users</Link>
+        <Link to="/users">Usuários</Link>
         <Link to="/">Lançamento de Sites <small style={{backgroundColor:'blue', padding:'0.3rem 0.6rem', borderRadius:'20px'}}>Beta</small></Link>
         <Link to="/">Sites Inativos <small style={{backgroundColor:'blue', padding:'0.3rem 0.6rem', borderRadius:'20px'}}>Beta</small></Link>
       </aside>
       <div className='content'>
         <header>
           <div>
-            Header
+            Dashboard
           </div>
           <div>
             Bem vindo, {user?.name}!
