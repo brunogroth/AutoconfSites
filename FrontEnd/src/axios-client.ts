@@ -8,7 +8,7 @@ const axiosClient = axios.create({
 
 // REQUEST.USE() = All requests gonna use this config
 axiosClient.interceptors.request.use((config) => {
-  const token = localStorage.get('ACCESS_TOKEN');
+  const token = localStorage.getItem('ACCESS_TOKEN');
   config.headers.Authorization = `Bearer ${token}`
   return config;
 });
@@ -19,17 +19,20 @@ axiosClient.interceptors.response.use(
   // onFulfilled
   (response) => {
 
-  return response;
-  // onRejected
-}, (error) => {
-  // response is inside error.
-  const {response} = error;
-  
-  // Threat errors
-  if ( response.status === 401) { 
-    localStorage.removeItem('ACCESS_TOKEN');
-  }
+    return response;
+    // onRejected
+  }, (error) => {
+    try {
+      // response is inside error.
+      const { response } = error;
 
-  throw error;
-})
+      // Threat errors
+      if (response.status === 401) {
+        localStorage.removeItem('ACCESS_TOKEN');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    throw error;
+  })
 export default axiosClient;
