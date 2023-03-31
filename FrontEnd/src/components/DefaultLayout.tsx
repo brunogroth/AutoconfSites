@@ -45,8 +45,8 @@ export default function DefaultLayout() {
         <hr/>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/users">Usuários</Link>
-        <Link to="/">Lançamento de Sites <small style={{backgroundColor:'blue', padding:'0.3rem 0.6rem', borderRadius:'20px'}}>Beta</small></Link>
-        <Link to="/">Sites Inativos <small style={{backgroundColor:'blue', padding:'0.3rem 0.6rem', borderRadius:'20px'}}>Beta</small></Link>
+        <Link to="/">Funcionalidade <small style={{backgroundColor:'blue', padding:'0.3rem 0.6rem', borderRadius:'20px'}}>Beta</small></Link>
+        <Link to="/">Outra func <small style={{backgroundColor:'blue', padding:'0.3rem 0.6rem', borderRadius:'20px'}}>Beta</small></Link>
       </aside>
       <div className='content'>
         <header>

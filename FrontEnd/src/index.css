@@ -89,6 +89,10 @@ input:focus {
     transition: 400ms;
 }
 
+.btn-add:hover {
+    background: #007846;
+}
+
 .text-center {
     text-align: center;
 }
