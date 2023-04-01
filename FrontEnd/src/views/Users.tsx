@@ -1,10 +1,10 @@
-//@ts-nocheck
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axiosClient from '../axios-client';
+import User from '../Entities/User';
 
 export default function Users() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -15,61 +15,69 @@ export default function Users() {
     setLoading(true);
     axiosClient.get('/users')
       .then(({ data }) => {
-        console.log(data.data);
+
         setUsers(data.data);
-        
+        console.log(data.meta.links);
         setLoading(false);
       })
       .catch(() => {
         setLoading(false);
       });
   }
+
+  const onDelete = (id: number) => {
+    return () => {
+      if (!window.confirm("Tem certeza que deseja excluir esse usuário?")) {
+        return;
+      }
+      axiosClient.delete(`/users/${id}`)
+        .then(() => {
+          //TODO Show notification
+          getUsers()
+        })
+    }
+  }
   return (
     <div>
-    
-      <div style={{display: 'flex', alignItems:'center', justifyContent:'space-between' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <h1>Usuários</h1>
-        <Link to={"/users/create"} className='btn btn-add fadeInDown animated'>Criar usuário</Link>
+        <Link to={"/users/create"} className='btn-add'>Criar usuário</Link>
       </div>
-      <table>
-
-        <theader>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Criado em</th>
-          <th>Editar</th>
-          <th>Excluir</th>
-        </theader>
-        {
-          loading ? 
-          <tr>
-            <td>
-          Carregando... ⌛
-          </td>
-          </tr>
-          : 
-          users.map(user => (
+      <div className='card animated fadeInDown'>
+        <table>
+          <thead>
             <tr>
-              <td>
-                {user.id}
-              </td>
-              <td>
-                {user.name}
-              </td>
-              <td>
-                {user.email}
-              </td>
-              <td>
-                {user.created_at}
-              </td>
-              <td>
-                <Link to={'users/' + user.id}>asdasd</Link>
-              </td>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Criado em</th>
+              <th>Editar</th>
+              <th>Ações</th>
+
             </tr>
-          ))
-        }
-      </table>
+          </thead>
+          {
+            loading ?
+              <tr>
+                <td colSpan={5} className='text-center'>Carregando... ⌛</td>
+              </tr>
+              :
+              users.map(user => (
+                <tr>
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.created_at}</td>
+                  <td>
+                    <Link style={{display:'block', alignSelf:'center', appearance:'button'}}className='btn-edit' to={'users/' + user.id}>Editar</Link> &nbsp;
+                    </td><td>
+                    <button className='btn-delete' onClick={onDelete(user.id)}>Excluir</button>
+                  </td>
+                </tr>
+              ))
+            }
+        </table>
+      </div>
     </div>
   )
 }
