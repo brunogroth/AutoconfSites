@@ -241,6 +241,44 @@ table > tbody > tr > td {
     animation-name: fadeInDown;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .pagination button {
+    background-color: #fff;
+    color: #074ebb;
+    border: 1px solid #074ebb;
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.25rem;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+  }
+  
+  .pagination button.active {
+    background-color: #074ebb;
+    color: #fff;
+  }
+  
+  .pagination button:hover:not(.active) {
+    background-color: #074ebb;
+    color: #fff;
+    cursor: pointer;
+    transition: 150ms;
+  }
+  
+  .pagination button:first-child {
+    margin-left: 0;
+  }
+  
+  .pagination button:last-child {
+    margin-right: 0;
+  }
+
 @keyframes fadeInDown {
     0% {
         opacity: 0;

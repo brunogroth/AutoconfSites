@@ -1,10 +1,13 @@
+
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axiosClient from '../axios-client';
 import User from '../Entities/User';
+import { decode } from 'html-entities';
 
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
+  const [pagination, setPagination] = useState();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -15,9 +18,8 @@ export default function Users() {
     setLoading(true);
     axiosClient.get('/users')
       .then(({ data }) => {
-
         setUsers(data.data);
-        console.log(data.meta.links);
+        setPagination(data.meta.links);
         setLoading(false);
       })
       .catch(() => {
@@ -25,7 +27,7 @@ export default function Users() {
       });
   }
 
-  const onDelete = (id: number) => {
+  const onDelete = (id: number | null) => {
     return () => {
       if (!window.confirm("Tem certeza que deseja excluir esse usuário?")) {
         return;
@@ -35,6 +37,23 @@ export default function Users() {
           //TODO Show notification
           getUsers()
         })
+    }
+  }
+
+  const onPaginate = (url: string) => {
+
+    return () => {
+      setLoading(true);
+
+      axiosClient.get(url)
+        .then(({ data }) => {
+          setUsers(data.data);
+          setLoading(false);
+          setPagination(data.meta.links)
+        })
+        .catch(() => {
+          setLoading(false);
+        });
     }
   }
   return (
@@ -58,25 +77,44 @@ export default function Users() {
           </thead>
           {
             loading ?
-              <tr>
-                <td colSpan={5} className='text-center'>Carregando... ⌛</td>
-              </tr>
-              :
-              users.map(user => (
+              <tbody>
                 <tr>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.created_at}</td>
-                  <td>
-                    <Link style={{display:'block', alignSelf:'center', appearance:'button'}}className='btn-edit' to={'users/' + user.id}>Editar</Link> &nbsp;
-                    </td><td>
-                    <button className='btn-delete' onClick={onDelete(user.id)}>Excluir</button>
+                  <td colSpan={6} className='text-center'>
+                    <h2>Carregando... ⌛</h2>
                   </td>
                 </tr>
+              </tbody>
+              :
+              <tbody>
+                {users.map(user => (
+                  <tr key={user.id}>
+                    <td>{user.id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.created_at}</td>
+                    <td>
+                      <Link className='btn-edit' to={'/users/' + user.id}>Editar</Link>
+                    </td><td>
+                      <button className='btn-delete' onClick={onDelete(user.id)}>Excluir</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+          }
+        </table>
+        {
+          !loading &&
+          pagination &&
+          <div className='pagination'>
+            {
+              Object.keys(pagination).map(key => (
+                <button className={pagination[key]['active'] && 'active'} onClick={onPaginate(pagination[key]['url'])} key={key}>
+                  {decode(pagination[key]['label'])}
+                </button>
               ))
             }
-        </table>
+          </div>
+        }
       </div>
     </div>
   )
