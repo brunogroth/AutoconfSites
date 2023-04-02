@@ -13,10 +13,12 @@ export default function Signup() {
   const passwordConfirmationRef = useRef<HTMLInputElement>(null);
 
   const [errors, setErrors] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { setUser, setToken } = useStateContext();
 
   const onSubmit = (ev: FormEvent) => {
     ev.preventDefault();
+    setLoading(true);
     // Construct payload
     const payload = {
       name: nameRef.current?.value,
@@ -25,14 +27,16 @@ export default function Signup() {
       password_confirmation: passwordConfirmationRef.current?.value,
     }
 
-    console.log(payload);
     // Submit request to server
     axiosClient.post('/signup', payload)
+
       .then(({ data }) => {
         setUser(data.user)
         setToken(data.token)
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         const response = err.response;
         if (response && response.status === 422) {
           setErrors(response.data.errors);
