@@ -6,7 +6,7 @@ type User = {
   email?: string;
   created_at?: string;
   password?: string;
-  password_confirmation: string;
+  password_confirmation?: string;
   profilePicture?: string;
   //accessRole: AccessRole;
 }

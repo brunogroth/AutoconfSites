@@ -4,14 +4,9 @@ import axiosClient from '../axios-client';
 import { useStateContext } from '../contexts/ContextProvider'
 import User from '../Entities/User'
 
-interface DefaultLayoutProps {
-  user: User;
-  token: string | null;
-  testing: boolean | null;
-}
-
 export default function DefaultLayout() {
   const {token, user, setUser, setToken} = useStateContext();
+  
   
   if (!token) {
     return <Navigate to='/login' />
@@ -22,7 +17,13 @@ export default function DefaultLayout() {
    
   axiosClient.post('/logout')
     .then(() => {
-      setUser({});
+      setUser({
+        id: null,
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+      });
       setToken(null);
     })
     .catch((err) => {
@@ -33,7 +34,10 @@ export default function DefaultLayout() {
   useEffect( () => {
     axiosClient.get('/user')
       .then(({data}) => {
-        setUser(data)
+        setUser(data);
+      })
+      .catch((error) => {
+        console.log(error)
       })
   }, []);
 
@@ -54,7 +58,7 @@ export default function DefaultLayout() {
             Dashboard
           </div>
           <div>
-            Bem vindo, {user?.name}!
+            Bem vindo, {user.name}!
             <a href="#" className='btn-logout' onClick={onLogout}><img height={'15px'} style={{marginTop:'1rem'}} src='https://cdn-icons-png.flaticon.com/512/1403/1403474.png'></img></a>
           </div>
         </header>
