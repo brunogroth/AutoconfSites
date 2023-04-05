@@ -39,7 +39,8 @@ input:focus {
 .btn,
 .btn-add,
 .btn-edit,
-.btn-delete {
+.btn-delete,
+.btn-dropdown {
     font-family: "Roboto", sans-serif;
     outline: 0;
     background: #074ebb;
@@ -93,6 +94,13 @@ input:focus {
     background: #007846;
 }
 
+.btn-dropdown {
+    text-decoration: none;
+    height: 80px;
+    width: 3rem;
+    color: #074ebb;
+    transition: all 0.3s;
+}
 .text-center {
     text-align: center;
 }
@@ -198,7 +206,7 @@ table > tbody > tr > td {
     padding: 1rem
 }
 
-#defaultLayout aside > a {
+#defaultLayout .aside a {
     display: block;
     padding: 0.75rem 1rem;
     border-radius: 6px;
@@ -217,7 +225,6 @@ table > tbody > tr > td {
 
 #defaultLayout header {
     height: 80px;
-    padding: 2rem 0 3rem 2rem;
     background-color: white;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -282,6 +289,11 @@ table > tbody > tr > td {
   .loading{
     margin: auto;
   }
+  
+  .offcanvas{
+    width: 65% !important;
+    background-color: #074ebb;
+  };
 
 @keyframes fadeInDown {
     0% {
