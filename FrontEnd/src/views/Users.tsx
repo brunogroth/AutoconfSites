@@ -6,6 +6,7 @@ import User from '../Entities/User';
 import { decode } from 'html-entities';
 import ReactLoading from 'react-loading';
 import { toast } from 'react-toastify';
+import { Toast } from 'react-toastify/dist/components';
 
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
@@ -39,9 +40,9 @@ export default function Users() {
       }
       axiosClient.delete(`/users/${id}`)
         .then(() => {
-          //TODO Show notification
           getUsers();
           setLoading(false);
+          toast.error('Usuário excluído com sucesso!');
         })
         .catch(() => {
           toast.error('Erro ao excluir o usuário.');

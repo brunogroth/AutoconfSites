@@ -63,7 +63,6 @@ const UserForm = () => {
       setLoading(true);
       axiosClient.post('/users/', user)
         .then(({ data }) => {
-          // TODO Notification
           navigate('/users');
           toast.success("Usuário criado com sucesso!");
           setLoading(false);

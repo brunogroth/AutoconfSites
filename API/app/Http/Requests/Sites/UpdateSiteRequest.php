@@ -11,7 +11,7 @@ class UpdateSiteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateSiteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:55',
+            'url' => 'required|url|unique:sites_inativos,url,' . $this->id, // exception of this id
+            'status' => 'required|integer',
+            'final_date' => 'required|date',
         ];
     }
 }
