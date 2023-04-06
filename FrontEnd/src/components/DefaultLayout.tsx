@@ -54,11 +54,10 @@ export default function DefaultLayout() {
           <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
-
           <hr />
           <Link to="/dashboard">Dashboard</Link>
+          <Link to="/inativos">Sites Inativos <small style={{ backgroundColor: 'blue', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>Beta</small></Link>
           <Link to="/users">Usuários</Link>
-          <Link to="/">Funcionalidade <small style={{ backgroundColor: 'blue', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>Beta</small></Link>
           <Link to="/">Outra func <small style={{ backgroundColor: 'blue', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>Beta</small></Link>
         </div>
       </div>
@@ -69,8 +68,8 @@ export default function DefaultLayout() {
           <span style={{ fontSize: '1.5rem', color: 'white' }}> Autoconf Sites</span>
           <hr />
           <Link to="/dashboard">Dashboard</Link>
+          <Link to="/inativos">Sites Inativos<small style={{ backgroundColor: 'blue', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>Beta</small></Link>
           <Link to="/users">Usuários</Link>
-          <Link to="/">Autoconf Sites <small style={{ backgroundColor: 'blue', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>Beta</small></Link>
           <Link to="/">Outra func <small style={{ backgroundColor: 'blue', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>Beta</small></Link>
         </aside>
       }

@@ -1,8 +1,8 @@
 //@ts-nocheck
 import { Link } from "react-router-dom";
-import axiosClient from "../axios-client.js";
+import axiosClient from "../../axios-client.js";
 import { createRef } from "react";
-import { useStateContext } from "../contexts/ContextProvider";
+import { useStateContext } from "../../contexts/ContextProvider.js";
 import { useState } from "react";
 import ReactLoading from 'react-loading';
 

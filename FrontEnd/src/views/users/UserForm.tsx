@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import axiosClient from '../axios-client';
-import User from '../Entities/User';
+import axiosClient from '../../axios-client';
+import User from '../../Entities/User';
 import { toast } from 'react-toastify';
 import ReactLoading from 'react-loading';
 

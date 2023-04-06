@@ -10,5 +10,7 @@ use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
-  
+  public function store(){
+      
+  }
 }

@@ -2,11 +2,13 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
 import Dashboard from "./views/Dashboard";
-import Login from "./views/Login";
-import NotFound from "./views/NotFound";
-import Signup from "./views/Signup";
-import UserForm from "./views/UserForm";
+import Login from "./views/users/Login";
+import NotFound from "./views/users/NotFound";
+import Signup from "./views/users/Signup";
+import UserForm from "./views/users/UserForm";
 import Users from "./views/Users";
+import Sites from "./views/sites/inativos/Inativos";
+import Inativos from "./views/sites/inativos/Inativos";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />
+      },
+      {
+        path: '/inativos',
+        element: <Inativos />
       },
       {
         path: '/users',

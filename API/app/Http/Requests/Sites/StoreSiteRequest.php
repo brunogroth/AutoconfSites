@@ -11,7 +11,7 @@ class StoreSiteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StoreSiteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:55',
+            'url' => 'required|url|unique:sites_inativos,url',
+            'status' => 'required|integer',
+            'final_date' => 'required|date',
         ];
     }
 }
