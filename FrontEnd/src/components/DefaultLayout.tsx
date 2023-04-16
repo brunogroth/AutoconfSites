@@ -68,7 +68,7 @@ export default function DefaultLayout() {
           <span style={{ fontSize: '1.5rem', color: 'white' }}> Autoconf Sites</span>
           <hr />
           <Link to="/dashboard">Dashboard</Link>
-          <Link to="/inativos">Sites Inativos<small style={{ backgroundColor: 'blue', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>Beta</small></Link>
+          <Link to="/inativos">Sites Inativos <small style={{ backgroundColor: 'blue', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>Beta</small></Link>
           <Link to="/users">Usuários</Link>
           <Link to="/">Outra func <small style={{ backgroundColor: 'blue', padding: '0.3rem 0.6rem', borderRadius: '20px' }}>Beta</small></Link>
         </aside>

@@ -36,7 +36,6 @@ input:focus {
     border-color: #074ebb;
 }
 
-.btn,
 .btn-add,
 .btn-edit,
 .btn-delete,
@@ -81,13 +80,6 @@ input:focus {
 }
 .btn-logout:hover {
     background-color: rgba(0, 0, 0, 0.1);
-}
-
-.btn:hover,
-.btn:active,
-.btn:focus {
-    background: #093371;
-    transition: 400ms;
 }
 
 .btn-add:hover {

@@ -9,6 +9,7 @@ import UserForm from "./views/users/UserForm";
 import Users from "./views/Users";
 import Sites from "./views/sites/inativos/Inativos";
 import Inativos from "./views/sites/inativos/Inativos";
+import InativosForm from "./views/sites/inativos/InativosForm";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/inativos',
         element: <Inativos />
+      },
+      {
+        path: '/inativos/create',
+        element: <InativosForm />
       },
       {
         path: '/users',
