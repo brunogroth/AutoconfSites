@@ -1,9 +1,10 @@
+//@ts-nocheck
 import React, { useEffect, useState } from 'react'
 import ReactLoading from 'react-loading'
 import { useParams } from 'react-router-dom';
 import axiosClient from '../../../axios-client';
 
-const InativosForm = () => {
+const InativoCreate = () => {
   const { id } = useParams();
   const [errors, setErrors] = useState();
   const [loading, setLoading] = useState<boolean>(false);
@@ -18,7 +19,6 @@ const InativosForm = () => {
   });
 
   useEffect(() => {
-
     getStatus();
   }, []);
   const getStatus = () => {
@@ -71,7 +71,7 @@ const InativosForm = () => {
               {
                 site.id ?
                 // TODO input readonly or do not show when CREATE 
-                  <input value={site.status} onChange={ev => setSite({ ...site, status: ev.target.value })} placeholder='https://site.com.br' type="text" readOnly={true} />
+                  <input value={statusList.find(stat => stat.id === site.status)} onChange={ev => setSite({ ...site, status: ev.target.value })} placeholder='https://site.com.br' type="text" readOnly={true} />
                   :
                   <div className='col-6'>
                     <select className="form-select">
@@ -93,4 +93,4 @@ const InativosForm = () => {
   )
 }
 
-export default InativosForm
+export default InativoCreate

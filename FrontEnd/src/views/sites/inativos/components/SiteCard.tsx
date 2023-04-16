@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faMoneyBill, faMoneyBillTransfer, faMoneyBillWave, faMoneyCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface SiteCardProps {
+  
   name: string;
   id: number;
   url: string;
@@ -11,6 +12,7 @@ interface SiteCardProps {
   disableAt: string;
   status: number;
   timeRemaining: string;
+  statusColorIndicator: string;
   onEdit: () => void;
   onRestore: () => void;
   onDelete: () => void;
@@ -24,13 +26,14 @@ const SiteCard: React.FC<SiteCardProps> = ({
   disableAt,
   status,
   timeRemaining,
+  statusColorIndicator,
   onEdit,
   onRestore,
   onDelete,
 }) => {
   return (
     <div className="col-3">
-      <div className="card site-card">
+      <div className="card site-card" style={{'borderTop': `7px solid ${statusColorIndicator}` }}>
         
         <div className="card-body">
           <h5 className="card-title site-card-title">

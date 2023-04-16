@@ -1,19 +1,35 @@
+//@ts-nocheck
 import React, { useEffect, useState } from 'react'
 import axiosClient from '../../../axios-client'
 import { Link } from 'react-router-dom';
 import SiteCard from './components/SiteCard';
 import ReactLoading from 'react-loading';
 
-
-
 const Sites = () => {
   const [sites, setSites] = useState<Site[]>([])
   const [loading, setLoading] = useState<boolean>(false);
+  const [statusList, setStatusList] = useState<[]>([]);
 
   useEffect(() => {
     setLoading(true);
     getSites();
+    getStatus();
   }, []);
+
+  const getStatus = () => {
+    setLoading(true);
+    axiosClient.get('/inativos-status')
+
+      .then(({ data }) => {
+
+        setStatusList(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  }
 
   const getSites = () => {
     axiosClient.get('/sites')
@@ -41,21 +57,17 @@ const Sites = () => {
         <div className="row">
           {
             loading ?
-              <ReactLoading className={'loading'} type={'cylon'} color={'#074ebb'} height={120} width={120} />
-              :
-              sites.map(site => (
-                <>
-                  <SiteCard key={site.id} name={site.name} id={site.id} url={site.url} createdAt={''} disableAt={''} status={site.status} timeRemaining={''} 
-                    onEdit={function (): void {}} onRestore={function (): void {}} onDelete={function (): void {}} />
-                  <SiteCard key={site.id} name={site.name} id={site.id} url={site.url} createdAt={''} disableAt={''} status={site.status} timeRemaining={''} 
-                    onEdit={function (): void {}} onRestore={function (): void {}} onDelete={function (): void {}} />
-                  <SiteCard key={site.id} name={site.name} id={site.id} url={site.url} createdAt={''} disableAt={''} status={site.status} timeRemaining={''} 
-                    onEdit={function (): void {}} onRestore={function (): void {}} onDelete={function (): void {}} />
-                  <SiteCard key={site.id} name={site.name} id={site.id} url={site.url} createdAt={''} disableAt={''} status={site.status} timeRemaining={''} 
-                    onEdit={function (): void {}} onRestore={function (): void {}} onDelete={function (): void {}} />
-                </>
+            <ReactLoading className={'loading'} type={'cylon'} color={'#074ebb'} height={120} width={120} />
+            :
+            sites.map(site => (
+              <>  
+                <SiteCard key={site.id} name={site.name} id={site.id} url={site.url}
+                  createdAt={site.created_at} disableAt={site.final_date} status={site.status}
+                  timeRemaining={site.final_date - site.created_at}
+                  statusColorIndicator={statusList.find(stat => stat.id === site.status).color}
+                  onEdit={function (): void {}} onRestore={function (): void {}} onDelete={function (): void {}} />
+              </>
               ))
-
           }
         </div>
       </div>
