@@ -44,8 +44,6 @@ const InativoCreate = () => {
       {loading ?
         <h1>&nbsp;</h1>
         :
-        site.id ?
-          <h1>Atualizar Site #{site.id} - {site.name}</h1> :
           <h1>Solicitar Pausa</h1>
       }
       <div className='card animated fadeInDown'>
@@ -64,7 +62,7 @@ const InativoCreate = () => {
             <form onSubmit={onSubmit} className='row'>
 
               <label>Nome do site</label>
-              <input value={site.name} onChange={ev => setSite({ ...site, name: ev.target.value })} placeholder='Nome' type="text" />
+              <input onChange={ev => setSite({ ...site, name: ev.target.value })} placeholder='Nome' type="text" />
               <label>URL</label>
               <input value={site.url} onChange={ev => setSite({ ...site, url: ev.target.value })} placeholder='https://site.com.br' type="url" />
               <label>Status</label>

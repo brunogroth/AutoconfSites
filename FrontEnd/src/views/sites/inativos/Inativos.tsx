@@ -34,7 +34,7 @@ const Sites = () => {
   const getSites = () => {
     axiosClient.get('/sites')
       .then(({ data }) => {
-        console.log(data);
+        //console.log(data);
         setSites(data.data);
         setLoading(false);
       })
@@ -57,16 +57,14 @@ const Sites = () => {
         <div className="row">
           {
             loading ?
-            <ReactLoading className={'loading'} type={'cylon'} color={'#074ebb'} height={120} width={120} />
-            :
-            sites.map(site => (
-              <>  
+              <ReactLoading className={'loading'} type={'cylon'} color={'#074ebb'} height={120} width={120} />
+              :
+              sites.map(site => (
                 <SiteCard key={site.id} name={site.name} id={site.id} url={site.url}
                   createdAt={site.created_at} disableAt={site.final_date} status={site.status}
                   timeRemaining={site.final_date - site.created_at}
-                  statusColorIndicator={statusList.find(stat => stat.id === site.status).color}
-                  onEdit={function (): void {}} onRestore={function (): void {}} onDelete={function (): void {}} />
-              </>
+                  statusColorIndicator={statusList.find(stat => stat.id === site.status) && statusList.find(stat => stat.id === site.status).color}
+                  onEdit={function (): void { }} onRestore={function (): void { }} onDelete={function (): void { }} />
               ))
           }
         </div>

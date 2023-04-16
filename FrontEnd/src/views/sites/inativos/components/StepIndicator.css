@@ -1,0 +1,45 @@
+.stepWrapper {
+  position: relative;
+}
+
+.stepIndicator{
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  font-weight: 600;
+  align-items: center;
+  border: 1px solid #e3e3e3;
+  color: #074ebb;
+  background: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 2rem;
+  border-radius: 100%;
+}
+
+.stepIndicator.active{
+  color: white !important;
+  background: #074ebb !important;
+}
+
+.stepIndicator:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  border: 1px solid #e3e3e3;
+  height: 3.8rem;
+  width: 0;
+  left: -90%;
+  transform: translateX(-50%);
+  transform: rotate(90deg);
+
+}
+
+.stepLabel {
+  color: rgba(119, 119, 119, 0.9);
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}

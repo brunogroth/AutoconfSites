@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/users', UserController::class);
     Route::apiResource('/sites', SiteController::class);
     Route::get('/inativos-status', function () {
-        $status = InativosStatus::all();
+        $status = InativosStatus::where('id', '<>', 6)->get();
          return $status;
     });
 });

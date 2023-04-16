@@ -1,7 +1,8 @@
 import React from 'react';
 import './SiteCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEdit, faMoneyBill, faMoneyBillTransfer, faMoneyBillWave, faMoneyCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faClock, faEdit, faMoneyBill, faMoneyBillTransfer, faMoneyBillWave, faMoneyCheck, faTrash, faUserClock } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 interface SiteCardProps {
   
@@ -34,8 +35,11 @@ const SiteCard: React.FC<SiteCardProps> = ({
   return (
     <div className="col-3">
       <div className="card site-card" style={{'borderTop': `7px solid ${statusColorIndicator}` }}>
-        
+
         <div className="card-body">
+        {
+          status === 3 ? <FontAwesomeIcon accentHeight="1" icon={faClock} /> : '' 
+        }
           <h5 className="card-title site-card-title">
             {name} - #{id}
           </h5>
@@ -63,9 +67,9 @@ const SiteCard: React.FC<SiteCardProps> = ({
             <button className="btn btn-outline-danger" onClick={onDelete}>
               <FontAwesomeIcon icon={faTrash} />
             </button>
-            <button className="btn btn-primary" onClick={onEdit}>
+            <Link to={`edit/${id}`} className="btn btn-primary">
               <FontAwesomeIcon icon={faEdit} /> Editar
-            </button>
+            </Link>
           </div>
         </div>
       </div>

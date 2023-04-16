@@ -19,6 +19,7 @@ class SiteResource extends JsonResource
             'name' => $this->name,
             'url' => $this->url,
             'status' => $this->status,
+            'created_at' => $this->created_at,
             'final_date' => $this->final_date
         ];
     }
