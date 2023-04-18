@@ -1,7 +1,7 @@
 import React from 'react';
 import './SiteCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faClock, faEdit, faMoneyBill, faMoneyBillTransfer, faMoneyBillWave, faMoneyCheck, faTrash, faUserClock } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faBookDead, faCheck, faClock, faEdit, faMoneyBill, faMoneyBillTransfer, faMoneyBillTrendUp, faMoneyBillWave, faMoneyBillWheat, faMoneyCheck, faPause, faPowerOff, faReceipt, faStop, faStopCircle, faToggleOff, faTrash, faUserClock } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 interface SiteCardProps {
@@ -37,11 +37,16 @@ const SiteCard: React.FC<SiteCardProps> = ({
       <div className="card site-card" style={{'borderTop': `7px solid ${statusColorIndicator}` }}>
 
         <div className="card-body">
-        {
-          status === 3 ? <FontAwesomeIcon accentHeight="1" icon={faClock} /> : '' 
-        }
+        
           <h5 className="card-title site-card-title">
-            {name} - #{id}
+          {
+            status === 1 && <FontAwesomeIcon icon={faClock} color={'#818181'} /> ||
+            status === 2 && <FontAwesomeIcon icon={faPause} /> ||
+            status === 3 && <FontAwesomeIcon icon={faCheck} /> || 
+            status === 4 && <FontAwesomeIcon icon={faClock} color={'#818181'} /> ||
+            status === 5 && <FontAwesomeIcon icon={faBan} />
+          }
+        &nbsp;{name}
           </h5>
           <p className="card-text site-card-text">
             <strong>URL:</strong> {url}

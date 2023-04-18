@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ReactLoading from 'react-loading'
 import { useParams } from 'react-router-dom';
 import axiosClient from '../../../axios-client';
+import { toast } from 'react-toastify';
 
 const InativoCreate = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const InativoCreate = () => {
     id: null,
     name: '',
     url: '',
-    status: '',
+    status: 1,
     final_date: '',
   });
 
@@ -36,15 +37,30 @@ const InativoCreate = () => {
       });
   }
 
-  const onSubmit = () => {
-    return 1;
+  const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+    setLoading(true);
+    axiosClient.post('/sites/', site)
+      .then(({ data }) => {
+        navigate('/inativos');
+        toast.success("Solicitação registrada com sucesso!");
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+        const response = err.response;
+        if (response && response.status === 422) {
+          setErrors(response.data.errors)
+        }
+      });
   };
   return (
     <>
       {loading ?
         <h1>&nbsp;</h1>
         :
-          <h1>Solicitar Pausa</h1>
+        <h1>Solicitar Pausa de Site</h1>
       }
       <div className='card animated fadeInDown'>
         {
@@ -66,23 +82,16 @@ const InativoCreate = () => {
               <label>URL</label>
               <input value={site.url} onChange={ev => setSite({ ...site, url: ev.target.value })} placeholder='https://site.com.br' type="url" />
               <label>Status</label>
-              {
-                site.id ?
-                // TODO input readonly or do not show when CREATE 
-                  <input value={statusList.find(stat => stat.id === site.status)} onChange={ev => setSite({ ...site, status: ev.target.value })} placeholder='https://site.com.br' type="text" readOnly={true} />
-                  :
-                  <div className='col-6'>
-                    <select className="form-select">
-                      {statusList.map(status => (
-                        //@ts-ignore
-                        <option key={status.id} value={status.id}>{status.description}</option>
-                      )
-                      )}
-                    </select>
-                  </div>
-
-              }
-              <button className='btn-edit'>Salvar</button>
+              <input value={'Aguardando Pausa'} type="text" disabled />
+              <label>Tempo de Expiração</label>
+              {/* TODO CALCULO DA FINAL_DATE (data atual + x dias) e armazenar em ...site */}
+              <select className='form-select mb-3'>
+                <option value={15}>15 dias</option>
+                <option value={30}>30 dias</option>
+                <option value={45}>45 dias</option>
+              </select>
+              
+              <button className='btn-edit'>Solicitar</button>
             </form>
         }
 

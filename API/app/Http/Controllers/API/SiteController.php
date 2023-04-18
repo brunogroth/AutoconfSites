@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreSiteRequest;
-use App\Http\Requests\UpdateSiteRequest;
+use App\Http\Requests\Sites\StoreSiteRequest;
+use App\Http\Requests\Sites\UpdateSiteRequest;
 use App\Http\Resources\SiteResource;
 
 use App\Models\Site;

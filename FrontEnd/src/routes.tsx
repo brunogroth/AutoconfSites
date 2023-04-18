@@ -9,7 +9,7 @@ import UserForm from "./views/users/UserForm";
 import Users from "./views/Users";
 import Sites from "./views/sites/inativos/Inativos";
 import Inativos from "./views/sites/inativos/Inativos";
-import InativoCreate from "./views/sites/inativos/SiteCreate";
+import InativoCreate from "./views/sites/inativos/InativoCreate";
 import InativoEdit from "./views/sites/inativos/InativoEdit";
 
 const router = createBrowserRouter([
