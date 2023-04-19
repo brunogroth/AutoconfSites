@@ -35,7 +35,7 @@ const InativoEdit = () => {
     // Edit
     if (site.id !== 0) {
       setLoading(true);
-      axiosClient.patch(`/sites/${site.id}`, site)
+      axiosClient.put(`/sites/${site.id}`, site)
         .then(() => {
           navigate('/inativos');
           toast.info("Site editado com sucesso!", {theme: "colored"});
@@ -112,7 +112,7 @@ const InativoEdit = () => {
             <h4 className='mb-2'>Dados do site</h4>
             <div className="form-group">
               <label htmlFor="name">Revenda</label>
-              <input value={site.name} onChange={ev => setSite({ ...site, name: ev.target.value })} type="text" className="form-control" id="name" aria-describedby="Nome" placeholder="Enter email" />
+              <input value={site.name} onChange={ev => setSite({ ...site, name: ev.target.value })} type="text" className="form-control" id="name" name="name" aria-describedby="Nome" placeholder="Enter email" />
             </div>
             <div className="form-group">
               <label htmlFor="url">URL do site</label>
@@ -120,11 +120,11 @@ const InativoEdit = () => {
             </div>
             <div className="form-group">
               <label htmlFor="initialDate">Data inicial</label>
-              <input value={site.created_at && site.created_at.toString()} onChange={ev => setSite({ ...site, created_at: ev.target.value })} id="initialDate" type="text" className="form-control" name="initial_date" disabled />
+              <input value={site.created_at.toString()} type="text" className="form-control" disabled />
             </div>
             <div className="form-group mb-3">
               <label htmlFor="status">Status</label>
-              <select id="status" name="status" onChange={ev => setSite({ ...site, status: ev.target.value })} className="form-select">
+              <select id="status" name="status" onChange={ev => setSite({ ...site, status: parseInt(ev.target.value) })} className="form-select">
                 {
                   statusList.map(stat => (
                     <option key={stat.id} value={stat.id} selected={stat.id === site.status}>{stat.description}</option>

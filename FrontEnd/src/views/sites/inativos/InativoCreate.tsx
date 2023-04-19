@@ -18,6 +18,7 @@ const InativoCreate = () => {
     status: 1,
     final_date: '',
   });
+const today = new Date;
 
   useEffect(() => {
     getStatus();
@@ -55,6 +56,18 @@ const InativoCreate = () => {
         }
       });
   };
+
+  const updateFinalDate = (ev) => {
+    ev.preventDefault();
+    const datesum = new Date();
+    datesum.setDate(today.getDate() + parseInt(ev.target.value));
+    const string_date = today.getMonth() + '/' + datesum.getDate()  + '/' +  today.getFullYear()
+    console.log('today: ' + today + '| ' +'datesum= ' + datesum + 'string+date = ' + string_date);
+    const final_date = new Date(string_date);
+    
+    setSite({ ...site, final_date: datesum })
+    console.log( final_date, site);
+  }
   return (
     <>
       {loading ?
@@ -85,7 +98,7 @@ const InativoCreate = () => {
               <input value={'Aguardando Pausa'} type="text" disabled />
               <label>Tempo de Expiração</label>
               {/* TODO CALCULO DA FINAL_DATE (data atual + x dias) e armazenar em ...site */}
-              <select className='form-select mb-3'>
+              <select className='form-select mb-3' onChange={updateFinalDate}>
                 <option value={15}>15 dias</option>
                 <option value={30}>30 dias</option>
                 <option value={45}>45 dias</option>

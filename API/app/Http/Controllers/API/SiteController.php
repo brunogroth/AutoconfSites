@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Sites\StoreSiteRequest;
-use App\Http\Requests\Sites\UpdateSiteRequest;
 use App\Http\Resources\SiteResource;
-
+// TODO fix imports path
+use App\Http\Requests\StoreSiteRequest;
+use App\Http\Requests\UpdateSiteRequest;
 use App\Models\Site;
 
 class SiteController extends Controller
@@ -55,7 +55,7 @@ class SiteController extends Controller
 
   /**
    * Update the information of a site
-   * @param UpdateSiteRequest $request
+   * 
    * @param Site $site
    * 
    * @return Illuminate\Http\Resources\Json\AnonymousResourceCollection
